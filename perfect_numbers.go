@@ -27,7 +27,12 @@ func Classify(input uint64) (output Classification, err error) {
 	for i, t := uint64(2), input; i < t; i++ {
 		if input%i == 0 {
 			sum += i + input/i
+			if sum > input {
+				output = ClassificationAbundant
+				return
+			}
 			t = input / i
+
 		}
 	}
 	if input == sum {
